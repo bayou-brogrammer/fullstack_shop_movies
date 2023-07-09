@@ -1,8 +1,10 @@
 use shared::models::{CreateFilm, Film};
 use uuid::Uuid;
 
-pub mod memory_film_repository;
-pub mod postgres_film_repository;
+mod memory_film_repository;
+mod postgres_film_repository;
+pub use memory_film_repository::MemoryFilmRepository;
+pub use postgres_film_repository::PostgresFilmRepository;
 
 pub type FilmError = String;
 pub type FilmResult<T> = Result<T, FilmError>;

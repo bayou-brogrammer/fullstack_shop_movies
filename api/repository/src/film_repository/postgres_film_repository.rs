@@ -2,6 +2,7 @@ use shared::models::{CreateFilm, Film};
 
 use super::{FilmRepository, FilmResult};
 
+#[derive(Clone)]
 pub struct PostgresFilmRepository {
     pool: sqlx::PgPool,
 }
