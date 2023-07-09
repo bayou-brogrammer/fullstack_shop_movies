@@ -4,6 +4,9 @@ name    = "moviedevexperience"
 version = "0.1.0"
 
 [dependencies]
+# internal
+api-lib = { workspace = true }
+
 axum = { version = "0.6", features = ["tracing"] }
 shuttle-axum = "0.20"
 shuttle-runtime = "0.20"

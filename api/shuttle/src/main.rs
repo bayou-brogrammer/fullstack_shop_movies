@@ -2,30 +2,16 @@ use std::time::Duration;
 
 use axum::{
     body::Bytes,
-    extract::{MatchedPath, State},
+    extract::MatchedPath,
     http::{HeaderMap, Request},
-    response::{IntoResponse, Response},
-    routing::get,
+    response::Response,
     Router,
 };
-use shuttle_runtime::tracing::instrument;
 use shuttle_runtime::{tracing, CustomError};
 use sqlx::Executor;
 use sqlx::PgPool;
 use tower_http::{classify::ServerErrorsFailureClass, trace::TraceLayer};
 use tracing::{info_span, Span};
-
-#[instrument(name = "version", skip(pool), fields(db = "postgres"))]
-async fn version(State(pool): State<PgPool>) -> impl IntoResponse {
-    let result: Result<String, sqlx::Error> = sqlx::query_scalar("SELECT version()")
-        .fetch_one(&pool)
-        .await;
-
-    match result {
-        Ok(version) => version,
-        Err(e) => format!("Error: {:?}", e),
-    }
-}
 
 #[shuttle_runtime::main]
 async fn axum(#[shuttle_shared_db::Postgres] pool: PgPool) -> shuttle_axum::ShuttleAxum {
@@ -35,8 +21,8 @@ async fn axum(#[shuttle_shared_db::Postgres] pool: PgPool) -> shuttle_axum::Shut
         .map_err(CustomError::new)?;
 
     let router = Router::new()
-        .route("/version", get(version))
         .with_state(pool)
+        .nest("/health", api_lib::health::service())
         .layer(
             TraceLayer::new_for_http()
                 .make_span_with(|request: &Request<_>| {
