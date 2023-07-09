@@ -23,7 +23,9 @@ async fn axum(#[shuttle_shared_db::Postgres] pool: PgPool) -> shuttle_axum::Shut
         .await
         .map_err(CustomError::new)?;
 
-    let router = Router::new().route("/", get(version)).with_state(pool);
+    let router = Router::new()
+        .route("/version", get(version))
+        .with_state(pool);
 
     Ok(router.into())
 }
