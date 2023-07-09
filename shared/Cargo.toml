@@ -3,6 +3,9 @@ edition = "2021"
 name    = "shared"
 version = "0.1.0"
 
+[features]
+backend = ["sqlx"]
+
 [dependencies]
 # serde
 serde = { workspace = true }
