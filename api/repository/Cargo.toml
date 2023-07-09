@@ -1,0 +1,10 @@
+[package]
+edition = "2021"
+name    = "api-repository"
+version = "0.1.0"
+
+[dependencies]
+shared = { workspace = true }
+
+async-trait = "0.1"
+uuid        = { workspace = true }

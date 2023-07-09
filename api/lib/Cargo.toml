@@ -4,6 +4,8 @@ name    = "api-lib"
 version = "0.1.0"
 
 [dependencies]
+api-repository = { workspace = true }
+
 axum = { workspace = true }
 
 # serde
