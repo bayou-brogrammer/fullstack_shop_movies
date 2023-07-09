@@ -1,0 +1,11 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "driver": "PostgreSQL",
+      "name": "local_movie_db",
+      "connectString": "postgres://postgres:postgres@localhost:17131/postgres"
+    }
+  ]
+}
