@@ -5,4 +5,23 @@ resolver = "2"
 [workspace.dependencies]
 # internal
 api-lib = { version = "0.1.0", path = "./api/lib" }
-# shared = { version = "0.1.0", path = "./shared" }
+shared  = { version = "0.1.0", path = "./shared" }
+
+axum = { version = "0.6", features = ["tracing"] }
+
+sqlx = { version = "0.6", default-features = false, features = [
+  "runtime-actix-native-tls",
+  "macros",
+  "postgres",
+  "uuid",
+  "chrono",
+  "json",
+] }
+
+tokio = "1.29"
+
+# utils
+chrono  = { version = "0.4", features = ["serde"] }
+serde   = { version = "1.0.164", features = ["derive"] }
+tracing = "0.1"
+uuid    = { version = "1.3.4", features = ["serde", "v4", "js"] }
