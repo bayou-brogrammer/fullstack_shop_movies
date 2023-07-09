@@ -2,7 +2,7 @@ use shared::models::{CreateFilm, Film};
 
 use super::{FilmRepository, FilmResult};
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct PostgresFilmRepository {
     pool: sqlx::PgPool,
 }
@@ -27,7 +27,7 @@ impl FilmRepository for PostgresFilmRepository {
         .map_err(|e| e.to_string())
     }
 
-    async fn get_film(&self, film_id: &uuid::Uuid) -> FilmResult<Film> {
+    async fn get_film(&self, film_id: &uuid::Uuid) -> FilmResult<Option<Film>> {
         sqlx::query_as!(
             Film,
             r#"
@@ -35,7 +35,7 @@ impl FilmRepository for PostgresFilmRepository {
             "#,
             film_id
         )
-        .fetch_one(&self.pool)
+        .fetch_optional(&self.pool)
         .await
         .map_err(|e| e.to_string())
     }

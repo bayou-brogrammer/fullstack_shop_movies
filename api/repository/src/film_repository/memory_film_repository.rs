@@ -38,19 +38,16 @@ impl FilmRepository for MemoryFilmRepository {
         }
     }
 
-    async fn get_film(&self, film_id: &uuid::Uuid) -> FilmResult<Film> {
+    async fn get_film(&self, film_id: &uuid::Uuid) -> FilmResult<Option<Film>> {
         match self.films.read() {
             Ok(films) => {
-                let result = films
-                    .get(film_id)
-                    .cloned()
-                    .ok_or_else(|| format!("Couldn't find film: {}", film_id));
+                let result = films.get(film_id).cloned();
 
-                if result.is_err() {
+                if result.is_none() {
                     tracing::error!("Couldn't retrive a film with id {}", film_id);
                 }
 
-                result
+                Ok(result)
             }
             Err(e) => {
                 let err = format!("An error happened while trying to read films: {}", e);
