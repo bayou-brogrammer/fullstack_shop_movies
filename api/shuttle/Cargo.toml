@@ -1,10 +1,10 @@
 [package]
-edition = "2021"
-name    = "api-shuttle"
+name = "moviedevexperience"
 version = "0.1.0"
+edition = "2021"
 
 [dependencies]
-actix-web         = "4.3.1"
-shuttle-actix-web = "0.20.0"
-shuttle-runtime   = "0.20.0"
-tokio             = "1.26.0"
+axum = "0.6.18"
+shuttle-axum = "0.20.0"
+shuttle-runtime = "0.20.0"
+tokio = "1.28.2"

@@ -1,9 +1,5 @@
-[package]
-edition = "2021"
-name    = "fullstack_shop"
-version = "0.1.0"
-
 [workspace]
-members = ["api/lib", "api/shuttle", "shared"]
+members  = ["api/lib", "api/shuttle", "shared"]
+resolver = "2"
 
-[dependencies]
+[workspace.dependencies]

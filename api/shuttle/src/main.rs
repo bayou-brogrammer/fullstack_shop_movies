@@ -1,17 +1,12 @@
-use actix_web::{get, web::ServiceConfig};
-use shuttle_actix_web::ShuttleActixWeb;
+use axum::{routing::get, Router};
 
-#[get("/")]
 async fn hello_world() -> &'static str {
-    "Hello World!"
+    "Hello, world!"
 }
 
 #[shuttle_runtime::main]
-async fn actix_web(
-) -> ShuttleActixWeb<impl FnOnce(&mut ServiceConfig) + Send + Clone + 'static> {
-    let config = move |cfg: &mut ServiceConfig| {
-        cfg.service(hello_world);
-    };
+async fn axum() -> shuttle_axum::ShuttleAxum {
+    let router = Router::new().route("/", get(hello_world));
 
-    Ok(config.into())
+    Ok(router.into())
 }
