@@ -5,15 +5,18 @@ version = "0.1.0"
 
 [dependencies]
 # internal
-api-lib = { workspace = true }
+api-lib        = { workspace = true }
+api-repository = { workspace = true }
 
-shuttle-axum      = "0.20"
-shuttle-runtime   = "0.20"
-shuttle-shared-db = { version = "0.20", features = ["postgres"] }
+shuttle-axum          = "0.20"
+shuttle-runtime       = "0.20"
+shuttle-shared-db     = { version = "0.20", features = ["postgres"] }
+shuttle-static-folder = "0.20.0"
 
 axum       = { workspace = true }
+axum-extra = { workspace = true }
 sqlx       = { workspace = true }
 tokio      = { workspace = true }
-tower-http = { version = "0.4.0", features = ["trace"] }
+tower-http = { workspace = true }
 
 tracing = { workspace = true }

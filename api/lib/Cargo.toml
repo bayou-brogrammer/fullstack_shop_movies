@@ -5,8 +5,10 @@ version = "0.1.0"
 
 [dependencies]
 api-repository = { workspace = true }
+shared         = { workspace = true }
 
 axum = { workspace = true }
+uuid = { workspace = true }
 
 # serde
 serde      = { workspace = true }

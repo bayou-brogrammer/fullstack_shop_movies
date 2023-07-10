@@ -1,2 +1,5 @@
 /target
 Secrets*.toml
+
+# Ignore the static folder
+static/
