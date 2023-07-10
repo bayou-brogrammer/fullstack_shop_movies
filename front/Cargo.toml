@@ -4,9 +4,8 @@ name    = "front"
 version = "0.1.0"
 
 [dependencies]
-dioxus         = "0.3"
-dioxus-desktop = "0.3"
-dioxus-web     = "0.3"
+dioxus     = "0.3"
+dioxus-web = "0.3"
 
 log         = "0.4"
 wasm-logger = "0.2"
