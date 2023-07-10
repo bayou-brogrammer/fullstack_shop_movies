@@ -1,0 +1,61 @@
+# project tasks
+[tasks.api-run]
+args          = ["shuttle", "run"]
+command       = "cargo"
+env           = { RUST_LOG = "info" }
+install_crate = "cargo-shuttle"
+workspace     = false
+
+[tasks.front-serve]
+args          = ["serve"]
+command       = "dioxus"
+cwd           = "./front"
+install_crate = "dioxus-cli"
+workspace     = false
+
+[tasks.front-build]
+script = '''
+# shuttle issue with static files
+# location is different depending on the environment
+rm -rf api/shuttle/static static
+mkdir api/shuttle/static
+mkdir static
+cd front
+dioxus build --release
+# local development 
+cp -r dist/* ../api/shuttle/static
+# production
+cp -r dist/* ../static
+'''
+script_runner = "@shell"
+workspace = false
+
+# local db
+[tasks.db-start]
+script = '''
+docker run -d --name devbcn-workshop -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=devbcn postgres
+'''
+script_runner = "@shell"
+workspace = false
+
+[tasks.db-stop]
+script = '''
+docker stop postgres
+docker rm postgres
+'''
+script_runner = "@shell"
+workspace = false
+
+# general tasks
+[tasks.clippy]
+args          = ["clippy"]
+command       = "cargo"
+install_crate = "cargo-clippy"
+workspace     = false
+
+[tasks.format]
+args          = ["fmt", "--all", "--", "--check"]
+clear         = true
+command       = "cargo"
+install_crate = "rustfmt"
+workspace     = false
