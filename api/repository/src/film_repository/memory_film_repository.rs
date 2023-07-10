@@ -7,6 +7,7 @@ use uuid::Uuid;
 
 use super::{FilmRepository, FilmResult};
 
+#[derive(Debug)]
 pub struct MemoryFilmRepository {
     films: RwLock<HashMap<Uuid, Film>>,
 }
