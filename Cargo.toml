@@ -1,5 +1,5 @@
 [workspace]
-members  = ["api/lib", "api/shuttle", "shared"]
+members  = ["api/lib", "api/repository", "api/shuttle", "shared", "front"]
 resolver = "2"
 
 [workspace.dependencies]
